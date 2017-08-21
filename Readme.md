@@ -1,4 +1,4 @@
-# GSoC 2017 @STEllAR-GROUP
+# GSoC 2017 [@STEllAR-GROUP/hpx](https://github.com/STEllAR-GROUP/hpx)
 
 **Project:** [Re-implementing hpx::util::unwrapped and unifying the API of hpx::wait and hpx::when](https://summerofcode.withgoogle.com/projects/#5515024297623552)
 
@@ -29,11 +29,10 @@ replace the internal implementation:
      synchronous     *--> unwrap, unwrapping, unwrapped
      mapping and ----*--> wait_all, wait_any, wait_some
     traversal API    *--> when_any, when_some
-    (Almost done)
     
      asynchronous    *--> when_all
      traversal API --*
-    (In progress)    *--> dataflow
+                     *--> dataflow
 
 Through this contribution, many issues in the HPX issue tracker could be approached or closed,
 for instance: #1126 [1], #1132 [2], #1400 [3], #1404 [4] and #2456 [5].
@@ -45,6 +44,8 @@ phases of my Google Summer of Code project in detail.
 
 ## Contributions
 
+TODO List of commits
+
 
 
 ## Progress
@@ -54,16 +55,16 @@ During the community bonding phase, I approached some light defects in order
 to get used to the codebase as well as getting to know the HPX community.
 Meanwhile, I contributed to three particular fields of the HPX project:
 
-    - :. Documentation improvements:
-        - invoke
-        - invoke_fused
-        - unwrapped
-    - :. CMake improvements:
-        - A working directory pollution was fixed
-        - Soft link creation on Windows was enabled
-    - :. Doxygen improvements:
-        - Autolinking was fixed in some cases
-        - The `detail` namespace is excluded in the documentation by default now
+- **Documentation improvements:**
+    - invoke
+    - invoke_fused
+    - unwrapped
+- **CMake improvements:**
+    - A working directory pollution was fixed
+    - Soft link creation on Windows was enabled
+- **Doxygen improvements:**
+    - Autolinking was fixed in some cases
+    - The `detail` namespace is excluded in the documentation by default now
 
 If you are interested in the mentioned commits in detail,
 you may take a look at my GitHub HPX commit history [7].
@@ -83,11 +84,13 @@ pull request #2704.
 A minimalistic example of a typical use case of this API might be the following,
 where we map all values to floats:
 
-    hpx::util::tuple<float, std::vector<float>,
-                     hpx::util::tuple<float, float>> res =
-    map_pack([](int i) {
-        return float(i);
-    }, 1, std::vector<int>{2, 3, 4}, hpx::util::make_tuple(5, 6));
+```cpp
+hpx::util::tuple<float, std::vector<float>,
+                 hpx::util::tuple<float, float>> res =
+map_pack([](int i) {
+    return float(i);
+}, 1, std::vector<int>{2, 3, 4}, hpx::util::make_tuple(5, 6));
+```
 
 The API fully supports all requirements mentioned above like arbitrarily nested containers
 and move only types. Thus it's a real improvement over the previous internal code
@@ -114,14 +117,14 @@ arguments through, it was considered to split the deferred and the immediate
 unwrapped into two separated interfaces,
 since the implementation selection of `unwrapped` would be broken otherwise:
 
-    - `unwrap`: Unwraps a variadic pack of futures directly
-    - `unwrapping`: Creates a callable object that unwraps the futures
+- `unwrap`: Unwraps a variadic pack of futures directly
+- `unwrapping`: Creates a callable object that unwraps the futures
 
 Also, multiple versions of `unwrap` and `unwrapping` are provided to unwrap
 until a particular future depth of a given pack:
 
-    - `unwrap_n` and `unwrapping_n`: Unwraps futures recursively until depth `n`.
-    - `unwrap_all` and `unwrapping_all`: Unwraps all futures recursively which occur inside the pack.
+- `unwrap_n` and `unwrapping_n`: Unwraps futures recursively until depth `n`.
+- `unwrap_all` and `unwrapping_all`: Unwraps all futures recursively which occur inside the pack.
 
 Currently, the old `unwrapped` function forwards its input to `unwrap` and `unwrapping`,
 so we are able to test the behavior of the new implementation.
