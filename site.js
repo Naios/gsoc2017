@@ -67,6 +67,8 @@ $.extend($.easing,
         for (nav in navs) { $(navs[nav]).removeClass('active'); }
         $(navs[navID]).addClass('active');
     }
+    
+
 })( jQuery );
 
 
@@ -90,6 +92,11 @@ $(document).ready(function (){
             });
         }
 	});
+  
+  
+  particlesJS.load('intro', 'assets/particles.json', function() {
+    // ...
+  });
 
 });
 

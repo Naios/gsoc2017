@@ -14,17 +14,17 @@ markdown: kramdown
 
 
 ### content configuration ###
-title:       "SinglePaged - Simple Jekyll template"
-keywords:    "SinglePaged, jekyll, template, github, blog, single page"
-description: "A single-page template for Jekyll based blogs (like what you'd use on github pages!)"
-source_link: "https://github.com/t413/SinglePaged"
+title:       "GSoC 2017 @STEllAR-GROUP/hpx"
+keywords:    "GSoC 2017, Denis Blank, HPX"
+description: "This siteprovides the final report of my GSoC 2017 Project @STEllAR-GROUP"
+source_link: "https://naios.github.io/gsoc2017"
 favicon:     "img/favicon.ico"
 touch_icon:  "img/apple-touch-icon.png"
-google_analytics_key: UA-49607422-1 ## put YOUR key here to enable tracking! (blank to disable)
 
 
 ### template colors, used site-wide via css ###
 colors:
+  myheader:  '#056A7F'
   black:     '#111111'
   white:     '#f8f8f8'
   blue:      '#49a7e9'
@@ -32,6 +32,9 @@ colors:
   purple:    '#c869bf'
   orange:    '#fab125'
   turquoise: '#0fbfcf'
+  myblack:   '#23373B'
+  myblacklight: '#24525B'
+  mygrey:    '#F4F4F4'
 
 kramdown:
   auto_ids:  false
