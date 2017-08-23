@@ -2,7 +2,7 @@
 title: "Prospects"
 bg: myblacklight
 color: mygrey
-fa-icon: film
+fa-icon: eye
 ---
 
 ## Prospects
